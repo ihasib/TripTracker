@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignupViewController: UIViewController {
 
@@ -54,6 +55,7 @@ class SignupViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .mainBlueTint
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleSignup), for: .touchUpInside)
 //        button.anchor(heightConstant: 30)
         return button
     }()
@@ -84,8 +86,28 @@ class SignupViewController: UIViewController {
     
     // MARK: - targets
     @objc func handleSignin() {
-        let signupVC = SignupViewController()
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleSignup() {
+        guard let email = emailTextField.text else { return }
+        guard let name = nameTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        let accountType = accountTypeSegmentedControl.selectedSegmentIndex
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result , error) in
+            if let error = error {
+                print("Failed too register user  error =\(error)")
+                return
+            }
+            
+            let userPropertyValues = ["email": email, "fullname": name,
+                                      "accountType": accountType] as [String: Any]
+            guard let uid = result?.user.uid else {return}
+            Database.database().reference().child("users").child(uid).updateChildValues(userPropertyValues) { (error, ref) in
+                print("User successfully registered")
+            }
+        }
     }
     
     // MARK: - configure UI
