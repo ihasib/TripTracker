@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		486D43CC21D7A8E7D1BD7416 /* Pods_TripTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498FA19F49798550DE2334FD /* Pods_TripTracker.framework */; };
+		635B23F126845311008AA051 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 635B23F026845311008AA051 /* GoogleService-Info.plist */; };
 		63DF574A2683159B00D552F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF57492683159B00D552F8 /* AppDelegate.swift */; };
 		63DF574C2683159B00D552F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF574B2683159B00D552F8 /* SceneDelegate.swift */; };
 		63DF57532683159C00D552F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF57522683159C00D552F8 /* Assets.xcassets */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		498FA19F49798550DE2334FD /* Pods_TripTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		635B23F026845311008AA051 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63DF57462683159B00D552F8 /* TripTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF57492683159B00D552F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63DF574B2683159B00D552F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +30,8 @@
 		63DF57632683194900D552F8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		63DF5765268325B400D552F8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		63DF576726839C8900D552F8 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		E8C894078307C2781BEAF507 /* Pods-TripTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripTracker.debug.xcconfig"; path = "Target Support Files/Pods-TripTracker/Pods-TripTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		FBB5BB76E8E6A65C8004204D /* Pods-TripTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripTracker.release.xcconfig"; path = "Target Support Files/Pods-TripTracker/Pods-TripTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				486D43CC21D7A8E7D1BD7416 /* Pods_TripTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +51,8 @@
 			children = (
 				63DF57482683159B00D552F8 /* TripTracker */,
 				63DF57472683159B00D552F8 /* Products */,
+				BB53F5EA91F7B1DF641CC98D /* Pods */,
+				CF72C3C37F30A36D90D2A66D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +77,7 @@
 				63DF57522683159C00D552F8 /* Assets.xcassets */,
 				63DF57542683159C00D552F8 /* LaunchScreen.storyboard */,
 				63DF57572683159C00D552F8 /* Info.plist */,
+				635B23F026845311008AA051 /* GoogleService-Info.plist */,
 			);
 			path = TripTracker;
 			sourceTree = "<group>";
@@ -110,6 +120,24 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		BB53F5EA91F7B1DF641CC98D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8C894078307C2781BEAF507 /* Pods-TripTracker.debug.xcconfig */,
+				FBB5BB76E8E6A65C8004204D /* Pods-TripTracker.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CF72C3C37F30A36D90D2A66D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				498FA19F49798550DE2334FD /* Pods_TripTracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,9 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63DF575A2683159C00D552F8 /* Build configuration list for PBXNativeTarget "TripTracker" */;
 			buildPhases = (
+				563B3AE6B5446C2D66092D24 /* [CP] Check Pods Manifest.lock */,
 				63DF57422683159B00D552F8 /* Sources */,
 				63DF57432683159B00D552F8 /* Frameworks */,
 				63DF57442683159B00D552F8 /* Resources */,
+				A2DAF5535D083F19E4D31343 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -170,10 +200,53 @@
 			files = (
 				63DF57562683159C00D552F8 /* LaunchScreen.storyboard in Resources */,
 				63DF57532683159C00D552F8 /* Assets.xcassets in Resources */,
+				635B23F126845311008AA051 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		563B3AE6B5446C2D66092D24 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TripTracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2DAF5535D083F19E4D31343 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TripTracker/Pods-TripTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TripTracker/Pods-TripTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TripTracker/Pods-TripTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63DF57422683159B00D552F8 /* Sources */ = {
@@ -318,6 +391,7 @@
 		};
 		63DF575B2683159C00D552F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8C894078307C2781BEAF507 /* Pods-TripTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -336,6 +410,7 @@
 		};
 		63DF575C2683159C00D552F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBB5BB76E8E6A65C8004204D /* Pods-TripTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
