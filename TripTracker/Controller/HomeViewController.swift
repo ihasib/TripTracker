@@ -14,9 +14,12 @@ class HomeViewController: UIViewController {
     
     // MARK: - properties
     private let mapView = MKMapView()
+    private let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        enableLocationServices()
+        locationManager.delegate = self
         configureUI()
         if isUserLoggedOut() {
             let nav = UINavigationController(rootViewController: LoginViewController())
@@ -25,7 +28,7 @@ class HomeViewController: UIViewController {
         }
         view.backgroundColor = .blue
         
-        signout()
+        //signout()
     }
 
     func isUserLoggedOut() -> Bool{
@@ -44,7 +47,42 @@ class HomeViewController: UIViewController {
     }
     
     func configureUI() {
+        configureMapView()
+    }
+    
+    func configureMapView() {
         view.addSubview(mapView)
         mapView.frame = view.frame
+        
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .followWithHeading
+    }
+}
+
+
+extension HomeViewController {
+    func enableLocationServices() {
+        switch CLLocationManager.authorizationStatus() {
+            case .notDetermined:
+                print("notDetermined")
+                locationManager.requestWhenInUseAuthorization()
+            case .restricted, .denied:
+                print("restricted  denied")
+            case .authorizedAlways:
+                print("authorizedAlways")
+            case .authorizedWhenInUse:
+                print("authorizedWhenInUse")
+                locationManager.requestAlwaysAuthorization()
+            default:
+                break
+        }
+    }
+}
+
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestAlwaysAuthorization()
+        }
     }
 }
