@@ -45,6 +45,8 @@ class LoginViewController: UIViewController {
         
         titleFirstPart.append(titleSecondPart)
         button.setAttributedTitle(titleFirstPart, for: .normal)
+        
+        button.addTarget(self, action: #selector(handleSignup), for: .touchUpInside)
         return button
     }()
     
@@ -52,6 +54,23 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureUI()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    // MARK: - selectors
+    
+    @objc func handleSignup() {
+        let signupVC = SignupViewController()
+        navigationController?.pushViewController(signupVC, animated: true)
+    }
+    
+    // MARK: - configure UI
+    func configureUI() {
+        configureNavigationBar()
         view.backgroundColor = .backgroundColor
         
         view.addSubview(titleLabel)
@@ -74,7 +93,8 @@ class LoginViewController: UIViewController {
                             rightAnchor: view.rightAnchor, rightPadding: 30)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    func configureNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.barStyle = .black
     }
 }

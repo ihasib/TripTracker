@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
     
-    func getViewWithContainerView(image: UIImage, textField: UITextField) -> UIView {
+    func getViewWithContainerView(image: UIImage, textField: UITextField? = nil, segmentedControl: UISegmentedControl? = nil) -> UIView {
         let view = UIView()
         view.backgroundColor = .black
         let imageView = UIImageView()
@@ -18,17 +18,29 @@ extension UIView {
         
         
         view.addSubview(imageView)
-        imageView.anchor(leftAnchor: view.leftAnchor,
-                         heigtConstant: 24, widthConstant: 24,
-                         centerYParentView: view)
-        view.addSubview(textField)
-        textField.anchor(leftAnchor: imageView.rightAnchor, leftPadding: 10,
-                              rightAnchor: view.rightAnchor,  centerYParentView: view)
+        
+        if let textField = textField {
+            imageView.anchor(leftAnchor: view.leftAnchor, heightConstant: 24, widthConstant: 24,
+                             centerYParentView: view)
+            
+            view.addSubview(textField)
+            textField.anchor(leftAnchor: imageView.rightAnchor, leftPadding: 10,
+                             rightAnchor: view.rightAnchor,  centerYParentView: view)
+        }
+        if let segmentedControl = segmentedControl {
+            imageView.anchor(topAnchor: view.topAnchor,leftAnchor: view.leftAnchor,
+                             heightConstant: 24, widthConstant: 24)
+            view.addSubview(segmentedControl)
+            segmentedControl.anchor(topAnchor: imageView.bottomAnchor, topPadding: 5,
+                                    bottomAnchor: view.bottomAnchor, bottomPadding: 5,
+                                    leftAnchor: view.leftAnchor,
+                                    rightAnchor: view.rightAnchor)
+        }
         let separatorView = UIView()
         view.addSubview(separatorView)
         separatorView.backgroundColor = .white
         separatorView.anchor(bottomAnchor: view.bottomAnchor, leftAnchor: view.leftAnchor,
-                             rightAnchor: view.rightAnchor, heigtConstant: 0.75)
+                             rightAnchor: view.rightAnchor, heightConstant: 0.75)
         
         return view
     }
@@ -41,7 +53,7 @@ extension UIView {
                 leftPadding: CGFloat = 0,
                 rightAnchor: NSLayoutXAxisAnchor? = nil,
                 rightPadding: CGFloat = 0,
-                heigtConstant: CGFloat? = nil,
+                heightConstant: CGFloat? = nil,
                 widthConstant: CGFloat? = nil,
                 centerXParentView: UIView? = nil,
                 centerYParentView: UIView? = nil) {
@@ -64,7 +76,7 @@ extension UIView {
             self.rightAnchor.constraint(equalTo: rightAnchor, constant: -rightPadding).isActive = true
         }
         
-        if let height = heigtConstant {
+        if let height = heightConstant {
             self.heightAnchor.constraint(equalToConstant: height).isActive = true
         }
         
@@ -101,6 +113,6 @@ extension UIColor {
         return UIColor.init(red: red/255, green: green/255, blue: blue/255, alpha: 1.0)
     }
     
-    static let backgroundColor = UIColor.rgb(red: 25, green: 25, blue: 25)
+    static let backgroundColor = UIColor.rgb(red: 0, green: 0, blue: 0)
     static let mainBlueTint = UIColor.rgb(red: 17, green: 154, blue: 237)
 }
