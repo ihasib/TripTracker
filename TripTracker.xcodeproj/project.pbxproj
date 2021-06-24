@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		486D43CC21D7A8E7D1BD7416 /* Pods_TripTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498FA19F49798550DE2334FD /* Pods_TripTracker.framework */; };
 		635B23F126845311008AA051 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 635B23F026845311008AA051 /* GoogleService-Info.plist */; };
+		635B23F326849C80008AA051 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B23F226849C80008AA051 /* HomeViewController.swift */; };
 		63DF574A2683159B00D552F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF57492683159B00D552F8 /* AppDelegate.swift */; };
 		63DF574C2683159B00D552F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF574B2683159B00D552F8 /* SceneDelegate.swift */; };
 		63DF57532683159C00D552F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF57522683159C00D552F8 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		498FA19F49798550DE2334FD /* Pods_TripTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		635B23F026845311008AA051 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		635B23F226849C80008AA051 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		63DF57462683159B00D552F8 /* TripTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF57492683159B00D552F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63DF574B2683159B00D552F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				63DF57632683194900D552F8 /* LoginViewController.swift */,
 				63DF576726839C8900D552F8 /* SignupViewController.swift */,
+				635B23F226849C80008AA051 /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -126,7 +129,6 @@
 				E8C894078307C2781BEAF507 /* Pods-TripTracker.debug.xcconfig */,
 				FBB5BB76E8E6A65C8004204D /* Pods-TripTracker.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -258,6 +260,7 @@
 				63DF576826839C8900D552F8 /* SignupViewController.swift in Sources */,
 				63DF574C2683159B00D552F8 /* SceneDelegate.swift in Sources */,
 				63DF5766268325B400D552F8 /* Extensions.swift in Sources */,
+				635B23F326849C80008AA051 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

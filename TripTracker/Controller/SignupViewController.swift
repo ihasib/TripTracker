@@ -101,11 +101,14 @@ class SignupViewController: UIViewController {
                 return
             }
             
+            guard let homeVC = UIApplication.shared.keyWindow?.rootViewController as? HomeViewController else {return}
+            homeVC.configureUI()
             let userPropertyValues = ["email": email, "fullname": name,
                                       "accountType": accountType] as [String: Any]
             guard let uid = result?.user.uid else {return}
             Database.database().reference().child("users").child(uid).updateChildValues(userPropertyValues) { (error, ref) in
                 print("User successfully registered")
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -31,6 +32,7 @@ class LoginViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .mainBlueTint
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -66,6 +68,19 @@ class LoginViewController: UIViewController {
     @objc func handleSignup() {
         let signupVC = SignupViewController()
         navigationController?.pushViewController(signupVC, animated: true)
+    }
+    
+    @objc func handleLogin() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("Log in failed with error \(error)")
+            }
+            print("Login successful")
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: - configure UI
