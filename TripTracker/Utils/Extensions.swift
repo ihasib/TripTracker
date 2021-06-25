@@ -45,6 +45,13 @@ extension UIView {
         return view
     }
     
+    func addShadowEffect() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.95
+        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        layer.masksToBounds = false
+    }
+    
     func anchor(topAnchor: NSLayoutYAxisAnchor? = nil,
                 topPadding: CGFloat = 0,
                 bottomAnchor: NSLayoutYAxisAnchor? = nil,

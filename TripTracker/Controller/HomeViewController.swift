@@ -13,6 +13,8 @@ import MapKit
 class HomeViewController: UIViewController {
     
     // MARK: - properties
+    private let locationInputActivationView = LocationInputActivationView()
+    private let locationInputView = LocationInputView()
     private let mapView = MKMapView()
     private let locationManager = CLLocationManager()
 
@@ -21,11 +23,8 @@ class HomeViewController: UIViewController {
         enableLocationServices()
         locationManager.delegate = self
         configureUI()
-        if isUserLoggedOut() {
-            let nav = UINavigationController(rootViewController: LoginViewController())
-            nav.isModalInPresentation = true
-            present(nav, animated: false, completion: nil)
-        }
+        triggerCredentialPage()
+        
         view.backgroundColor = .blue
         
         //signout()
@@ -46,8 +45,45 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func triggerCredentialPage() {
+        if isUserLoggedOut() {
+            let nav = UINavigationController(rootViewController: LoginViewController())
+            nav.isModalInPresentation = true
+            present(nav, animated: false, completion: nil)
+        }
+    }
+    
     func configureUI() {
+        configureNavigationBar()
         configureMapView()
+        
+        view.addSubview(locationInputActivationView)
+        locationInputActivationView.anchor(topAnchor: view.safeAreaLayoutGuide.topAnchor,
+                                           topPadding: 15, leftAnchor: view.leftAnchor,
+                                           leftPadding: 20, rightAnchor: view.rightAnchor,
+                                           rightPadding: 20, heightConstant: 40)
+        locationInputActivationView.alpha = 0.0
+        UIView.animate(withDuration: 2) {
+            self.locationInputActivationView.alpha = 1.0
+        }
+        locationInputActivationView.delegate = self
+        locationInputView.delegate = self
+    }
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.barStyle = .black
+    }
+    
+    func configureLocationInputView() {
+        view.addSubview(locationInputView)
+        locationInputView.anchor(topAnchor: view.safeAreaLayoutGuide.topAnchor,
+                                 leftAnchor: view.leftAnchor, rightAnchor: view.rightAnchor,
+                                 heightConstant: 200)
+        UIView.animate(withDuration: 1){
+            self.locationInputActivationView.alpha = 0
+            self.locationInputView.alpha = 1
+        }
     }
     
     func configureMapView() {
@@ -84,5 +120,20 @@ extension HomeViewController: CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             locationManager.requestAlwaysAuthorization()
         }
+    }
+}
+
+extension HomeViewController: LocationInputActivationViewDelegate {
+    func showLocationInputActivationView() {
+        configureLocationInputView()
+    }
+}
+
+extension HomeViewController: LocationInputViewDelegate {
+    func dismissLocationInputView() {
+        UIView.animate(withDuration: 1, animations: {
+            self.locationInputView.alpha = 0
+            self.locationInputActivationView.alpha = 1
+        })
     }
 }

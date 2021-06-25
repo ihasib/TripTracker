@@ -142,9 +142,9 @@ class SignupViewController: UIViewController {
     }
     
     func configureNavigationBar() {
-            navigationController?.navigationBar.isHidden = true
-            navigationController?.navigationBar.barStyle = .black
-        }
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.barStyle = .black
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
