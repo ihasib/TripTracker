@@ -10,14 +10,17 @@ import UIKit
 import Firebase
 import MapKit
 
+private let reuseIdentifier = "LocationCell"
 class HomeViewController: UIViewController {
     
     // MARK: - properties
     private let locationInputActivationView = LocationInputActivationView()
     private let locationInputView = LocationInputView()
+    private let tableView = UITableView()
     private let mapView = MKMapView()
     private let locationManager = CLLocationManager()
-
+    private let locationInputViewHeight: CGFloat = 200
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         enableLocationServices()
@@ -56,6 +59,8 @@ class HomeViewController: UIViewController {
     func configureUI() {
         configureNavigationBar()
         configureMapView()
+        configureTableView()
+        configureLocationInputView()
         
         view.addSubview(locationInputActivationView)
         locationInputActivationView.anchor(topAnchor: view.safeAreaLayoutGuide.topAnchor,
@@ -79,10 +84,15 @@ class HomeViewController: UIViewController {
         view.addSubview(locationInputView)
         locationInputView.anchor(topAnchor: view.safeAreaLayoutGuide.topAnchor,
                                  leftAnchor: view.leftAnchor, rightAnchor: view.rightAnchor,
-                                 heightConstant: 200)
-        UIView.animate(withDuration: 1){
+                                 heightConstant: locationInputViewHeight)
+        locationInputView.alpha = 0
+    }
+    
+    func showLocationInputView() {
+        UIView.animate(withDuration: 1) {
             self.locationInputActivationView.alpha = 0
             self.locationInputView.alpha = 1
+            self.tableView.frame.origin.y = self.locationInputView.frame.origin.y + self.locationInputView.frame.size.height
         }
     }
     
@@ -92,6 +102,18 @@ class HomeViewController: UIViewController {
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .followWithHeading
+    }
+    
+    func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(LocationCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        tableView.tableFooterView = UIView()
+        
+        let tableViewHeight = view.safeAreaLayoutGuide.layoutFrame.height - locationInputView.frame.size.height
+        tableView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: tableViewHeight)
+        view.addSubview(tableView)
     }
 }
 
@@ -125,7 +147,7 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 extension HomeViewController: LocationInputActivationViewDelegate {
     func showLocationInputActivationView() {
-        configureLocationInputView()
+        showLocationInputView()
     }
 }
 
@@ -134,6 +156,29 @@ extension HomeViewController: LocationInputViewDelegate {
         UIView.animate(withDuration: 1, animations: {
             self.locationInputView.alpha = 0
             self.locationInputActivationView.alpha = 1
+            self.tableView.frame.origin.y = self.view.frame.height
         })
     }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Title"
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! LocationCell
+        return cell
+    }
+    
+    
 }
