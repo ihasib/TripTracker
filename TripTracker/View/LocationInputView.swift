@@ -16,6 +16,10 @@ class LocationInputView: UIView {
     // MARK: - properties
     weak var delegate: LocationInputViewDelegate?
     
+    var user: User? {
+        didSet {titleLabel.text = user?.fullname}
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Hasibur Rahman"

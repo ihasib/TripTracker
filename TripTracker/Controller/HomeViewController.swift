@@ -20,6 +20,9 @@ class HomeViewController: UIViewController {
     private let mapView = MKMapView()
     private let locationManager = CLLocationManager()
     private let locationInputViewHeight: CGFloat = 200
+    private var user: User? {
+        didSet { locationInputView.user = user}
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,9 @@ class HomeViewController: UIViewController {
         locationManager.delegate = self
         configureUI()
         triggerCredentialPage()
+        Service.shared.fetchUserData() {user in
+            self.user = user
+        }
         
         view.backgroundColor = .blue
         
