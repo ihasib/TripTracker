@@ -12,6 +12,6 @@ target 'TripTracker' do
 	pod 'Firebase/Database'
 	pod 'Firebase/Auth'
 #	pod 'Firebase/Firestore'
-#	pod 'GeoFire','>= 1.1'
+	pod 'GeoFire','>= 1.1'
 
 end

@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import GeoFire
 
 class SignupViewController: UIViewController {
 
     // MARK: - Properties
+    var homeVC: HomeViewController?
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "TRIP TRACKER"
@@ -20,6 +22,7 @@ class SignupViewController: UIViewController {
         return label
     }()
     
+    private let location = LocationHandler.shared.locationManager.location
     private let emailTextField = UITextField().getFieldWithExtraFeature(textLabel: "Email", isSecured: false)
     private let nameTextField = UITextField().getFieldWithExtraFeature(textLabel: "Full Name", isSecured: false)
     private let passwordTextField = UITextField().getFieldWithExtraFeature(textLabel: "Password", isSecured: true)
@@ -82,6 +85,7 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        print("location : \(location)")
     }
     
     // MARK: - targets
@@ -94,22 +98,49 @@ class SignupViewController: UIViewController {
         guard let name = nameTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         let accountType = accountTypeSegmentedControl.selectedSegmentIndex
-        
+        print("handle Signup")
         Auth.auth().createUser(withEmail: email, password: password) { (result , error) in
             if let error = error {
                 print("Failed too register user  error =\(error)")
                 return
             }
             
-            guard let homeVC = UIApplication.shared.keyWindow?.rootViewController as? HomeViewController else {return}
-            homeVC.configureUI()
+//            guard let homeVC = UIApplication.shared.keyWindow?.rootViewController as? HomeViewController else {print("Vc load failed")
+//                return
+//            }
+            //homeVC.configureUI()
+            
             let userPropertyValues = ["email": email, "fullname": name,
                                       "accountType": accountType] as [String: Any]
-            guard let uid = result?.user.uid else {return}
-            Database.database().reference().child("users").child(uid).updateChildValues(userPropertyValues) { (error, ref) in
-                print("User successfully registered")
-                self.dismiss(animated: true, completion: nil)
+            guard let uid = result?.user.uid else {
+                print("no user id fetched after id creation")
+                return
             }
+            print("checking account  type")
+            if accountType == 1 {
+                let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
+                guard  let location = self.location else {
+                    print("location nil")
+                    return
+                }
+                print("Location of mobile \(location)")
+                geofire.setLocation(location, forKey: uid, withCompletionBlock: {(error) in
+                    if let error = error {
+                        print("error = \(error)")
+                        return
+                    }
+                    self.uploadUserdataAndShowHomeController(uid: uid, userPropertyValues: userPropertyValues)
+                })
+            }
+            self.uploadUserdataAndShowHomeController(uid: uid, userPropertyValues: userPropertyValues)
+        }
+    }
+    
+    func uploadUserdataAndShowHomeController(uid: String, userPropertyValues: [String: Any]) {
+        REF_USERS.child(uid).updateChildValues(userPropertyValues) { (error, ref) in
+            print("User successfully registered")
+            self.homeVC?.configureUIAndData()
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

@@ -12,7 +12,7 @@ import Firebase
 class LoginViewController: UIViewController {
 
     // MARK: - Properties
-    
+    var homeVC: HomeViewController?
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "TRIP TRACKER"
@@ -67,6 +67,7 @@ class LoginViewController: UIViewController {
     
     @objc func handleSignup() {
         let signupVC = SignupViewController()
+        signupVC.homeVC = homeVC
         navigationController?.pushViewController(signupVC, animated: true)
     }
     
@@ -77,8 +78,26 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Log in failed with error \(error)")
+                return
             }
             print("Login successful")
+//            guard let homeVC = self.navigationController?.viewControllers.first as? HomeViewController else {
+//                print("Hasib : no root vc found")
+//                return
+//            }
+            
+//            guard let keywindow1 = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else {
+//                print("Hasib : home vc not found")
+//                return
+//            }
+//            print("Niss: \(keywindow1.rootViewController!)")
+//            guard let homeVC3 = keywindow1.rootViewController as? HomeViewController else{
+//                print("Hasib : casting failed")
+//                return
+//            }
+//            print("Hasib : home vc found")
+            
+            self.homeVC?.configureUIAndData()
             self.dismiss(animated: true, completion: nil)
         }
     }
