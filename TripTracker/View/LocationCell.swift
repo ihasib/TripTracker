@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import MapKit
 
 class LocationCell: UITableViewCell {
 
     // MARK: - properties
+    
+    var placemark: MKPlacemark? {
+        didSet{
+            titleLabel.text = placemark?.name
+            addressLabel.text = placemark?.address
+        }
+    }
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -30,7 +38,6 @@ class LocationCell: UITableViewCell {
     // MARK: - initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style , reuseIdentifier: reuseIdentifier)
-        
         let stack = UIStackView(arrangedSubviews: [titleLabel,addressLabel])
         stack.alignment = .fill
         stack.axis = .vertical

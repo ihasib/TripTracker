@@ -12,7 +12,7 @@ import Firebase
 class LoginViewController: UIViewController {
 
     // MARK: - Properties
-    var homeVC: HomeViewController?
+    weak var homeVC: HomeViewController?
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "TRIP TRACKER"

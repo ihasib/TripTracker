@@ -13,6 +13,7 @@
 		635B23F52684D971008AA051 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B23F42684D970008AA051 /* LocationInputActivationView.swift */; };
 		635BD60E269C3F180006865B /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BD60D269C3F180006865B /* DriverAnnotation.swift */; };
 		63AB5A3B269B059600BABB40 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB5A3A269B059600BABB40 /* LocationHandler.swift */; };
+		63ADE1A526D3A76600C03023 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ADE1A426D3A76600C03023 /* Log.swift */; };
 		63B85BAF2685A66A0068DDC1 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B85BAE2685A66A0068DDC1 /* LocationInputView.swift */; };
 		63B85BB12685E1300068DDC1 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B85BB02685E1300068DDC1 /* LocationCell.swift */; };
 		63B85BB3268609760068DDC1 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B85BB2268609760068DDC1 /* Service.swift */; };
@@ -33,6 +34,7 @@
 		635B23F42684D970008AA051 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
 		635BD60D269C3F180006865B /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		63AB5A3A269B059600BABB40 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
+		63ADE1A426D3A76600C03023 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		63B85BAE2685A66A0068DDC1 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		63B85BB02685E1300068DDC1 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		63B85BB2268609760068DDC1 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				63DF5765268325B400D552F8 /* Extensions.swift */,
 				63AB5A3A269B059600BABB40 /* LocationHandler.swift */,
+				63ADE1A426D3A76600C03023 /* Log.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				63DF574C2683159B00D552F8 /* SceneDelegate.swift in Sources */,
 				63DF5766268325B400D552F8 /* Extensions.swift in Sources */,
 				635B23F52684D971008AA051 /* LocationInputActivationView.swift in Sources */,
+				63ADE1A526D3A76600C03023 /* Log.swift in Sources */,
 				63B85BB12685E1300068DDC1 /* LocationCell.swift in Sources */,
 				63B85BB3268609760068DDC1 /* Service.swift in Sources */,
 				63B85BAF2685A66A0068DDC1 /* LocationInputView.swift in Sources */,
@@ -428,6 +432,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4AR488G66N;
 				INFOPLIST_FILE = TripTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -447,6 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4AR488G66N;
 				INFOPLIST_FILE = TripTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

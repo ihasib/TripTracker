@@ -15,6 +15,7 @@ private let annotationIdentifier = "annotationIdentifier"
 class HomeViewController: UIViewController {
     
     // MARK: - properties
+    private let TAG = "HomeViewController"
     private let locationInputActivationView = LocationInputActivationView()
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
@@ -34,6 +35,8 @@ class HomeViewController: UIViewController {
         didSet { locationInputView.user = user}
     }
     
+    private var searchResults = [MKPlacemark]()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -47,7 +50,7 @@ class HomeViewController: UIViewController {
 
     func fetchCurrentUser() {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
-            print("No current user")
+            Log.debug(tag: TAG, function: #function, msg: "No current user")
             return
         }
         Service.shared.fetchUserData(uid: currentUserId) {user in
@@ -57,12 +60,12 @@ class HomeViewController: UIViewController {
     
     func fetchDrivers() {
         guard let location = locationManager?.location else {
-            print("Hasib: location error \(locationManager)")
+            Log.debug(tag: TAG, function: #function, msg: "current user location error \(String(describing: locationManager))")
             return
         }
-        print("Hasib: NO location erro\\\r")
+        Log.debug(tag: TAG, function: #function, msg: "current user location = \(String(describing: location))")
         Service.shared.fetchDrivers(location: location) { (driver) in
-            print(" driver: \(driver)")
+            Log.debug(tag: self.TAG, function: #function, msg: " driver: \(driver)")
             guard let coordinate = driver.location?.coordinate else {return}
             
             let driverAnnotation = DriverAnnotation(uid: driver.uid, coordinate: coordinate)
@@ -73,6 +76,7 @@ class HomeViewController: UIViewController {
                     if let annotation = annotation as? DriverAnnotation {
                         if(annotation.uid == driver.uid) {
                             annotation.updateCoordinate(coordinate: coordinate)
+                            self.mapView.showAnnotations(self.mapView.annotations, animated: true)
                             return true
                         }
                     }
@@ -87,6 +91,7 @@ class HomeViewController: UIViewController {
     }
     
     func isUserLoggedOut() -> Bool{
+        Log.debug(tag: TAG, function: #function)
         if Auth.auth().currentUser?.uid == nil {
             return true
         }
@@ -94,6 +99,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func signOut() {
+        Log.debug(tag: TAG, function: #function)
         signout()
     }
     
@@ -107,6 +113,7 @@ class HomeViewController: UIViewController {
     }
     
     func tryToTriggerCredentialPage() {
+        Log.debug(tag: TAG, function: #function)
         if isUserLoggedOut() {
             let loginVC = LoginViewController()
             loginVC.homeVC = self
@@ -125,6 +132,7 @@ class HomeViewController: UIViewController {
     }
     
     func configureUI() {
+        Log.debug(tag: TAG, function: #function)
         configureNavigationBar()
         configureMapView()
         configureTableView()
@@ -189,9 +197,11 @@ class HomeViewController: UIViewController {
     }
 }
 
+    //MARK: extensions for delegates
 
 extension HomeViewController {
     func enableLocationServices() {
+        Log.debug(tag: TAG, function: #function,msg: "\(CLLocationManager.authorizationStatus())")
         switch CLLocationManager.authorizationStatus() {
             case .notDetermined:
                 print("notDetermined")
@@ -217,12 +227,42 @@ extension HomeViewController: LocationInputActivationViewDelegate {
 }
 
 extension HomeViewController: LocationInputViewDelegate {
+    func executeSearch(queryText: String) {
+        Log.debug(tag: TAG, function: #function)
+        searchBy(naturalLanguageQuery: queryText) { mkPlacemarks in
+            self.searchResults = mkPlacemarks
+            self.tableView.reloadData()
+        }
+    }
+    
     func dismissLocationInputView() {
         UIView.animate(withDuration: 1, animations: {
             self.locationInputView.alpha = 0
             self.locationInputActivationView.alpha = 1
             self.tableView.frame.origin.y = self.view.frame.height
         })
+    }
+}
+
+extension HomeViewController {
+    func searchBy(naturalLanguageQuery: String, completion: @escaping([MKPlacemark])->Void) {
+        var plcaemarks = [MKPlacemark]()
+        let request = MKLocalSearch.Request()
+        request.region = mapView.region
+        request.naturalLanguageQuery = naturalLanguageQuery
+        
+        let localSearch = MKLocalSearch(request: request)
+        localSearch.start {(response, error) in
+            guard let response = response else {
+                Log.debug(tag: self.TAG, function: #function, msg: "mapItems error")
+                return
+            }
+            response.mapItems.forEach( { item in
+                Log.debug(tag: self.TAG, function: #function, msg: "mapItems = \(String(describing: item.name))")
+                plcaemarks.append(item.placemark)
+            })
+            completion(plcaemarks)
+        }
     }
 }
 
@@ -237,11 +277,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return section == 0  ? 2 : searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! LocationCell
+        if indexPath.section == 1 {
+            cell.placemark = searchResults[indexPath.row]
+        }
         return cell
     }
 }
@@ -251,8 +294,10 @@ extension HomeViewController: MKMapViewDelegate {
         if let annotation = annotation as? DriverAnnotation {
             let view = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             view.image = #imageLiteral(resourceName: "chevron-sign-to-right")
+            Log.debug(tag: TAG, function: #function, msg: "annotaion = \(annotation)")
             return view
         }
+        Log.debug(tag: TAG, function: #function, msg: " No annotaion returned")
         return nil
     }
 }

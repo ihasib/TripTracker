@@ -11,6 +11,7 @@ import MapKit
 class DriverAnnotation: NSObject, MKAnnotation {
     dynamic var coordinate: CLLocationCoordinate2D//"dynamic" makes MKAnnotation a observer:  whenever coordinate of an annotation is set with a value, annotation gets redrawn
     var uid: String
+    private let TAG = "DriverAnnotation"
     
     init(uid: String, coordinate: CLLocationCoordinate2D) {
         self.uid = uid
@@ -18,6 +19,7 @@ class DriverAnnotation: NSObject, MKAnnotation {
     }
     
     func updateCoordinate(coordinate: CLLocationCoordinate2D) {
+        Log.debug(tag: TAG, function: #function,msg: "co-ordinate = \(coordinate)")
         UIView.animate(withDuration: 0.2) {
             self.coordinate = coordinate
         }

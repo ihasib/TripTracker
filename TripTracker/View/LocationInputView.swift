@@ -10,6 +10,7 @@ import UIKit
 
 protocol LocationInputViewDelegate: class {
     func dismissLocationInputView()
+    func executeSearch(queryText: String)
 }
 
 class LocationInputView: UIView {
@@ -69,12 +70,13 @@ class LocationInputView: UIView {
         return textField
     }()
     
-    private let destinationLocationTextField: UITextField = {
+    private lazy var destinationLocationTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Location you want to go"
         textField.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textField.returnKeyType = .search
         textField.font = UIFont.systemFont(ofSize: 14)
+        textField.delegate = self
         
         let paddingView = UIView()
         paddingView.frame.size.height = 30
@@ -126,4 +128,14 @@ class LocationInputView: UIView {
     @objc func handleBackButton() {
         delegate?.dismissLocationInputView()
     }
+}
+
+extension LocationInputView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text else { return false}
+            print("Hasib :\(text)")
+        delegate?.executeSearch(queryText: text)
+        return true
+    }
+    
 }
