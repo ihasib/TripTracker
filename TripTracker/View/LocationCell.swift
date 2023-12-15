@@ -21,7 +21,7 @@ class LocationCell: UITableViewCell {
     }
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14)
         label.text = "Shikder bari"
         return label

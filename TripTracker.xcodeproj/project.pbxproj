@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		486D43CC21D7A8E7D1BD7416 /* Pods_TripTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498FA19F49798550DE2334FD /* Pods_TripTracker.framework */; };
+		5B3832392B2C5E69001B0FAD /* RideActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3832382B2C5E69001B0FAD /* RideActionView.swift */; };
+		5B38323B2B2C5E8C001B0FAD /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B38323A2B2C5E8C001B0FAD /* Trip.swift */; };
 		635B23F126845311008AA051 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 635B23F026845311008AA051 /* GoogleService-Info.plist */; };
 		635B23F326849C80008AA051 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B23F226849C80008AA051 /* HomeViewController.swift */; };
 		635B23F52684D971008AA051 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B23F42684D970008AA051 /* LocationInputActivationView.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		498FA19F49798550DE2334FD /* Pods_TripTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B3832382B2C5E69001B0FAD /* RideActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideActionView.swift; sourceTree = "<group>"; };
+		5B38323A2B2C5E8C001B0FAD /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		635B23F026845311008AA051 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		635B23F226849C80008AA051 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		635B23F42684D970008AA051 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 			children = (
 				63B85BB42686422A0068DDC1 /* User.swift */,
 				635BD60D269C3F180006865B /* DriverAnnotation.swift */,
+				5B38323A2B2C5E8C001B0FAD /* Trip.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,6 +120,7 @@
 				635B23F42684D970008AA051 /* LocationInputActivationView.swift */,
 				63B85BAE2685A66A0068DDC1 /* LocationInputView.swift */,
 				63B85BB02685E1300068DDC1 /* LocationCell.swift */,
+				5B3832382B2C5E69001B0FAD /* RideActionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,7 +181,7 @@
 				63DF57422683159B00D552F8 /* Sources */,
 				63DF57432683159B00D552F8 /* Frameworks */,
 				63DF57442683159B00D552F8 /* Resources */,
-				A2DAF5535D083F19E4D31343 /* [CP] Embed Pods Frameworks */,
+				D69313311A5527310D55CEF7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -255,7 +261,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A2DAF5535D083F19E4D31343 /* [CP] Embed Pods Frameworks */ = {
+		D69313311A5527310D55CEF7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,6 +289,7 @@
 				63DF574A2683159B00D552F8 /* AppDelegate.swift in Sources */,
 				63DF576826839C8900D552F8 /* SignupViewController.swift in Sources */,
 				63AB5A3B269B059600BABB40 /* LocationHandler.swift in Sources */,
+				5B38323B2B2C5E8C001B0FAD /* Trip.swift in Sources */,
 				635BD60E269C3F180006865B /* DriverAnnotation.swift in Sources */,
 				63DF574C2683159B00D552F8 /* SceneDelegate.swift in Sources */,
 				63DF5766268325B400D552F8 /* Extensions.swift in Sources */,
@@ -290,6 +297,7 @@
 				63ADE1A526D3A76600C03023 /* Log.swift in Sources */,
 				63B85BB12685E1300068DDC1 /* LocationCell.swift in Sources */,
 				63B85BB3268609760068DDC1 /* Service.swift in Sources */,
+				5B3832392B2C5E69001B0FAD /* RideActionView.swift in Sources */,
 				63B85BAF2685A66A0068DDC1 /* LocationInputView.swift in Sources */,
 				635B23F326849C80008AA051 /* HomeViewController.swift in Sources */,
 				63B85BB52686422A0068DDC1 /* User.swift in Sources */,
@@ -429,6 +437,7 @@
 			baseConfigurationReference = E8C894078307C2781BEAF507 /* Pods-TripTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4AR488G66N;
 				INFOPLIST_FILE = TripTracker/Info.plist;
@@ -437,8 +446,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = MyOrg.TripTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hasib.trip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,16 +459,18 @@
 			baseConfigurationReference = FBB5BB76E8E6A65C8004204D /* Pods-TripTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4AR488G66N;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TripTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = MyOrg.TripTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samsung.ios.smartswitch.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

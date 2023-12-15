@@ -15,6 +15,7 @@ protocol LocationInputViewDelegate: class {
 
 class LocationInputView: UIView {
     // MARK: - properties
+    private static let TAG = "LocationInputView"
     weak var delegate: LocationInputViewDelegate?
     
     var user: User? {
@@ -132,8 +133,9 @@ class LocationInputView: UIView {
 
 extension LocationInputView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         guard let text = textField.text else { return false}
-            print("Hasib :\(text)")
+        Log.debug(tag: LocationInputView.TAG, function: #function, msg: "textFieldShouldReturn")
         delegate?.executeSearch(queryText: text)
         return true
     }
